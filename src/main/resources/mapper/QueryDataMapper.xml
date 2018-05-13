@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.keepsoft.dao.QueryDataMapper">
+    
+    <select id="findAllHMSGTSC" parameterType="Map" resultType="com.keepsoft.domain.V_HMSGTSC_OA">
+        select * from guianmis4.V_HMSGTSC_OA
+    </select>
+    
+    <select id="findAllHMFASC" parameterType="Map" resultType="com.keepsoft.domain.V_HMFASC_OA">
+        select * from guianmis4.V_HMFASC_OA
+    </select>
+    
+    <select id="findAllHMGHTJ" parameterType="Map" resultType="com.keepsoft.domain.V_HMGHTJ_OA">
+        select * from guianmis4.V_HMGHTJ_OA
+    </select>
+    
+</mapper>

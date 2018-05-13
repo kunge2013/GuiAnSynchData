@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.keepsoft.sqlserverdao.DataInsertMapper">
+    
+    <select id="findAll"  resultType="com.keepsoft.domain.EHR_USER">
+        select * from EHR_USER
+    </select>
+    
+   
+     <!-- 道路许可证阶段-->
+     
+    <delete id="deleteBatchAppFirst" >
+	   delete from DESIGN_APPROVAL_FIRST where road_pro_ID in 
+	    <foreach collection ="list" item="app"  open="(" separator="," close=")">
+	        #{app.road_pro_ID}
+	    </foreach >
+	</delete>
+	
+	<delete id="deleteBatchAppSecond" >
+	   delete from DESIGN_APPROVAL_SECOND where road_pro_ID in 
+	    <foreach collection ="list" item="app"  open="(" separator="," close=")">
+	        #{app.road_pro_ID}
+	    </foreach >
+	</delete>
+	
+	<delete id="deleteBatchAppThrid" >
+	   delete from DESIGN_APPROVAL_THIRD where road_pro_ID in 
+	    <foreach collection ="list" item="app"  open="(" separator="," close=")">
+	        #{app.road_pro_ID}
+	    </foreach >
+	</delete>
+	
+    <insert id="insertBatchAppFirst">
+	   
+	    <foreach collection ="list" item="app" separator =";">
+	         INSERT INTO DESIGN_APPROVAL_FIRST 
+	         (name, details_condition, is_feed_back, road_pro_ID) 
+	         VALUES
+	         (#{app.name}, #{app.details_condition}, #{app.is_feed_back}, #{app.road_pro_ID})
+	    </foreach >
+	</insert>
+    
+    
+    
+    <insert id="insertBatchAppSecond">
+	 
+	   <foreach collection ="list" item="app" separator =";">
+		    INSERT INTO DESIGN_APPROVAL_SECOND 
+		    (
+		    admissibility_time, 
+		    construct_unit, 
+		    design_unit, 
+		    censorship, 
+		    approval_stage, 
+		    relevant_archives, 
+		    road_pro_ID)
+		    VALUES 
+	        (
+	         #{app.admissibility_time},
+	         #{app.construct_unit},
+	         #{app.design_unit} ,
+	         #{app.censorship},
+	         #{app.approval_stage},
+	         #{app.relevant_archives},
+	         #{app.road_pro_ID}
+	         )
+	    </foreach >
+	</insert>
+	
+	
+	
+	
+	
+	<insert id="insertBatchAppThrid">
+	
+	    <foreach collection ="list" item="app" separator =";" index="index">
+	        INSERT INTO DESIGN_APPROVAL_THIRD 
+	         (
+	         construct_name,
+	         construct_unit,
+	         design_unit,
+	         draw_organize,
+	         approval_stage,
+	         relevant_archives,
+	         road_pro_ID
+	         )
+	 	 VALUES 
+	 	   (
+	         #{app.construct_name}, 
+	         #{app.construct_unit},
+	         #{app.design_unit},
+	         #{app.draw_organize},
+	         #{app.approval_stage},
+	         #{app.relevant_archives},
+	         #{app.road_pro_ID}
+	         )
+	    </foreach >
+	</insert>
+	
+	
+	<!-- 项目数据同步操作-->
+	<delete id="deleteBatchMassFirst">
+	   delete from DESIGN_MASSIF_FIRST where massif_idx in 
+	    <foreach collection ="list" item="app"  open="(" separator="," close=")">
+	        #{app.massif_idx}
+	    </foreach >
+	</delete>
+	
+	<delete id="deleteBatchMassSecond">
+	   delete from DESIGN_MASSIF_SECOND where massif_idx in 
+	    <foreach collection ="list" item="app"  open="(" separator="," close=")">
+	        #{app.massif_idx}
+	    </foreach >
+	</delete>
+	
+	<delete id="deleteBatchMassThrid">
+	   delete from DESIGN_MASSIF_THIRD where massif_idx in 
+	    <foreach collection ="list" item="app"  open="(" separator="," close=")">
+	        #{app.massif_idx}
+	    </foreach >
+	</delete>
+	
+	
+	
+    <insert id="insertBatchMassFirst">
+	   
+	    <foreach collection ="list" item="app" separator =";">
+	    INSERT INTO DESIGN_MASSIF_FIRST 
+	    (name, details_condition, is_feed_back, massif_idx) 
+	    VALUES
+	    (#{app.name}, #{app.details_condition}, #{app.is_feed_back}, #{app.massif_idx})
+	    </foreach >
+	</insert>
+	
+	
+	<insert id="insertBatchMassSecond">
+	 
+	   <foreach collection ="list" item="app" separator =";">
+	    	INSERT INTO DESIGN_MASSIF_SECOND 
+	    	(admissibility_time, construct_unit, design_unit, censorship, approval_stage, relevant_archives, massif_idx) 
+	    	VALUES
+	        (#{app.admissibility_time}, #{app.construct_unit}, #{app.design_unit} ,#{app.censorship},#{app.approval_stage},#{app.relevant_archives},#{app.massif_idx})
+	    </foreach >
+	</insert>
+	
+	<insert id="insertBatchMassThrid">
+	 
+	   <foreach collection ="list" item="app" separator =";">
+	      INSERT INTO DESIGN_MASSIF_THIRD 
+	      (construct_name, construct_unit, design_unit, draw_organize, approval_stage, relevant_archives, massif_idx) 
+	  	  VALUES 
+	      (#{app.construct_name}, #{app.construct_unit}, #{app.design_unit} ,#{app.draw_organize},#{app.approval_stage},#{app.relevant_archives},#{app.massif_idx})
+	    </foreach >
+	</insert>
+	
+</mapper>
