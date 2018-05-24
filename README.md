@@ -6,4 +6,4 @@
 4.spring boot 技术
 5.spring 任务定时调度配载
 6.多种数据类型的数据库同步，sqlserver oracle 数据源集成
-7.java新特性的应用
+7.java8 新特性的应用
