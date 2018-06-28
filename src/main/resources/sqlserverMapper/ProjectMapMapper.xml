@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.keepsoft.sqlserverdao.ProjectMapper">
+    
+    <select id="findAll"  resultType="com.keepsoft.domain.T_PROJECT_MAPPER">
+        select * from T_PROJECT_MAPPER
+    </select>
+    
+    <!-- 查询所有 -->
+     <select id="findAllProjects"  resultType="com.keepsoft.domain.LocalProject">
+       select pronum as localPId , proname as localPName from GR_PROJECT
+			GROUP BY pronum,proname
+    </select>
+    <!-- 新增 -->
+    <insert id="insertProject" parameterType="com.keepsoft.domain.T_PROJECT_MAPPER">
+    	INSERT INTO T_PROJECT_MAPPER (
+			[cxsPId],
+			[cxsPName],
+			[localPName],
+			[localPId]
+		)
+		VALUES
+		(
+			#{cxsPId},
+			#{cxsPName},
+			#{localPName},
+			#{localPId}
+		);
+    </insert>
+    
+    <update id="updateProject" parameterType="com.keepsoft.domain.T_PROJECT_MAPPER">
+		update
+		T_PROJECT_MAPPER
+		set 
+		 cxsPId = #{cxsPId},
+		 cxsPName = #{cxsPName},
+		 localPName = #{localPName},
+		 localPId = #{localPId}
+		where 
+		idx=#{idx}
+	</update>
+	
+	<delete id="deleteProject" parameterType="com.keepsoft.domain.T_PROJECT_MAPPER">
+		delete from
+		T_PROJECT_MAPPER
+		where idx=#{idx}
+	</delete>
+	
+	<delete id="deleteProjectByLocalPId" parameterType="com.keepsoft.domain.T_PROJECT_MAPPER">
+		delete from
+		T_PROJECT_MAPPER
+		where localPId=#{localPId}
+	</delete>
+	
+	<delete id="deleteProjectByCxPId" parameterType="com.keepsoft.domain.T_PROJECT_MAPPER">
+		delete from
+		T_PROJECT_MAPPER
+		where cxsPId=#{cxsPId}
+	</delete>
+</mapper>
