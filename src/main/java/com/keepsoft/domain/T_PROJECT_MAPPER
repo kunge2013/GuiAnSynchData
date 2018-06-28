@@ -1,0 +1,54 @@
+package com.keepsoft.domain;
+
+import java.io.Serializable;
+
+/**
+ * 项目配置映射
+ * @author admin
+ *
+ */
+public class T_PROJECT_MAPPER implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1096721956795291304L;
+	
+
+	public String getCxsPId() {
+		return cxsPId;
+	}
+	public void setCxsPId(String cxsPId) {
+		this.cxsPId = cxsPId;
+	}
+	public String getCxsPName() {
+		return cxsPName;
+	}
+	public void setCxsPName(String cxsPName) {
+		this.cxsPName = cxsPName;
+	}
+	public String getLocalPId() {
+		return localPId;
+	}
+	public void setLocalPId(String localPId) {
+		this.localPId = localPId;
+	}
+	public String getLocalPName() {
+		return localPName;
+	}
+	public void setLocalPName(String localPName) {
+		this.localPName = localPName;
+	}
+	private Integer idx ;
+	public Integer getIdx() {
+		return idx;
+	}
+	public void setIdx(Integer idx) {
+		this.idx = idx;
+	}
+	private String cxsPId;
+	private String cxsPName;
+	private String localPId;
+	private String localPName;
+	
+}
