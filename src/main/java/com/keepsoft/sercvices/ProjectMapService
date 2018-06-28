@@ -1,0 +1,64 @@
+package com.keepsoft.sercvices;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.keepsoft.domain.LocalProject;
+import com.keepsoft.domain.T_PROJECT_MAPPER;
+import com.keepsoft.sqlserverdao.ProjectMapper;
+
+@Service
+public class ProjectMapService {
+	@Autowired
+	private ProjectMapper mapper;
+
+	public List<T_PROJECT_MAPPER> findAll() {
+		return mapper.findAll();
+	}
+
+	/**
+	 * 查询所有本地项目
+	 * 
+	 * @return
+	 */
+	public List<LocalProject> findAllProjects() {
+		return mapper.findAllProjects();
+	}
+
+	/**
+	 * 新增更新
+	 * 
+	 * @param t_PROJECT_MAPPER
+	 * @return
+	 */
+	public void saveOrUpdate(T_PROJECT_MAPPER t_PROJECT_MAPPER) {
+		//先删除重复的再插入保证一对一的关系
+		deleteProjectByCxPId(t_PROJECT_MAPPER);
+		deleteProjectByLocalPId(t_PROJECT_MAPPER);
+		if (t_PROJECT_MAPPER.getIdx() == null) {
+			mapper.insertProject(t_PROJECT_MAPPER);
+		} else {
+			mapper.updateProject(t_PROJECT_MAPPER);
+		}
+	}
+
+	/**
+	 * 删除
+	 * 
+	 * @param t_PROJECT_MAPPER
+	 * @return
+	 */
+	public int remove(T_PROJECT_MAPPER t_PROJECT_MAPPER) {
+		return mapper.deleteProject(t_PROJECT_MAPPER);
+	}
+	
+	public int deleteProjectByCxPId(T_PROJECT_MAPPER t_PROJECT_MAPPER){
+		return mapper.deleteProjectByCxPId(t_PROJECT_MAPPER);
+	}
+	
+	public int deleteProjectByLocalPId(T_PROJECT_MAPPER t_PROJECT_MAPPER){
+		return mapper.deleteProjectByLocalPId(t_PROJECT_MAPPER);
+	}
+}
