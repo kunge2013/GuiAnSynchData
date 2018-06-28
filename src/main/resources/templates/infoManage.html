@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org"  lang="en">
+<head>
+<meta charset="utf-8"/>
+<script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+<link rel="stylesheet" href="./angular/bootstrap.min.css"/>
+<script th:src="@{/angular/angular.min.js}"></script>
+<script th:src="@{/infoManageCtrl.js}"></script>
+
+</head>
+
+<body ng-app="myApp" ng-controller="infoManageCtrl">
+<div class="container">
+<h3>诚信所本地系统项目编号对应</h3>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>编辑</th>
+      <th>诚信所项目名称</th>
+      <th>诚信所项目名称ID</th>
+      <th>本地项目名称</th>
+      <th>本地项目名称ID</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="data in infoData">
+      <td>
+        <button class="btn" ng-click="editInfoManage(data.idx)">
+           		编辑
+        </button>
+        <button class="btn" ng-click="removeInfoManage(data.idx)">
+           		删除
+        </button>
+      </td>
+      <td>{{ data.cxsPId }}</td>
+      <td>{{ data.cxsPName }}</td>
+      <td>{{ data.localPName }}</td>
+      <td>{{ data.localPId }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr/>
+<button class="btn btn-success" ng-click="editInfoManage('new')">
+    创建新映射
+</button>
+<hr/>
+
+<h3 ng-show="edit">创建关系映射:</h3>
+<h3 ng-hide="edit">编辑对应行:</h3>
+
+<form class="form-horizontal">
+  <div class="form-group">
+    <label class="col-sm-2 control-label">诚信所项目名称:</label>
+    <div class="col-sm-10">
+    <input type="text" ng-model="cxsPName" ng-disabled="!edit" placeholder="诚信所项目名称"/>
+    </div>
+  </div> 
+  <div class="form-group">
+    <label class="col-sm-2 control-label">诚信所项目名称ID:</label>
+    <div class="col-sm-10">
+    <input type="text" ng-model="cxsPId" ng-disabled="!edit" placeholder="诚信所项目名称ID"/>
+    </div>
+  </div>
+  <div class="form-group">
+   <label class="col-sm-2 control-label">本地项目名称:</label>
+    <div class="col-sm-10">
+		 <select id="static_dropdown" class="form-control" ng-model="localProject"  style="width: 174px;">
+		 	<option ng-repeat="x in localProjects" value="{{x}}">{{x.localPName}}</option>
+		</select>
+	 </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">本地项目名称:</label>
+    <div class="col-sm-10">
+    <input type="text" ng-model="localPName" ng-disabled="true" placeholder="本地项目名称"/>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label class="col-sm-2 control-label">本地项目名称ID:</label>
+    <div class="col-sm-10">
+    <input type="text" ng-model="localPId" ng-disabled="true" placeholder="本地项目名称ID"/>
+    </div>
+  </div>
+</form>
+<hr/>
+<button class="btn btn-success" ng-disabled="error || incomplete" ng-click="saveInfo()">
+	修改映射
+</button>
+</div>
+</body>
+</html>
