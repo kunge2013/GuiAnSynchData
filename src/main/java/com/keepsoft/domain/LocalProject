@@ -1,0 +1,26 @@
+package com.keepsoft.domain;
+
+import java.io.Serializable;
+
+public class LocalProject implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1764094141302737371L;
+	
+	private String localPName;
+	private String localPId;
+	public String getLocalPName() {
+		return localPName;
+	}
+	public void setLocalPName(String localPName) {
+		this.localPName = localPName;
+	}
+	public String getLocalPId() {
+		return localPId;
+	}
+	public void setLocalPId(String localPId) {
+		this.localPId = localPId;
+	}
+}
