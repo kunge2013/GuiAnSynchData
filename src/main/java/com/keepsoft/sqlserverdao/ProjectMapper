@@ -1,0 +1,29 @@
+package com.keepsoft.sqlserverdao;
+
+import java.util.List;
+
+import com.keepsoft.domain.LocalProject;
+import com.keepsoft.domain.T_PROJECT_MAPPER;
+
+public interface ProjectMapper {
+	/**
+	 * 查询所有
+	 * @return
+	 */
+	List<T_PROJECT_MAPPER> findAll();
+	/**
+	 * 查询所有本地项目
+	 * @return
+	 */
+	List<LocalProject> findAllProjects();
+	
+	void insertProject(T_PROJECT_MAPPER t_PROJECT_MAPPER);
+	
+	void updateProject(T_PROJECT_MAPPER t_PROJECT_MAPPER);
+	
+	int deleteProject(T_PROJECT_MAPPER t_PROJECT_MAPPER);
+	
+	int deleteProjectByCxPId(T_PROJECT_MAPPER t_PROJECT_MAPPER);
+	
+	int deleteProjectByLocalPId(T_PROJECT_MAPPER t_PROJECT_MAPPER);
+}
